@@ -87,7 +87,7 @@ def minimax(posicion_gato, posicion_raton, profundidad, es_turno_gato, tamano_ta
             valor = minimax(movimiento, posicion_raton, profundidad - 1, False, tamano_tablero, pos_cueva, alpha, beta, prev_posiciones_raton)
             mejor_valor = max(mejor_valor, valor)
             alpha = max(alpha, valor)
-            if beta < alpha:
+            if beta <= alpha:
                 break  # Poda beta
         return mejor_valor
     else:
@@ -97,7 +97,7 @@ def minimax(posicion_gato, posicion_raton, profundidad, es_turno_gato, tamano_ta
             valor = minimax(posicion_gato, movimiento, profundidad - 1, True, tamano_tablero, pos_cueva, alpha, beta, nuevo_prev_posiciones_raton)
             mejor_valor = min(mejor_valor, valor)
             beta = min(beta, valor)
-            if beta < alpha:
+            if beta <= alpha:
                 break  # Poda alpha
         return mejor_valor
 
@@ -149,7 +149,7 @@ def jugar_gato_raton(tamano_tablero, posicion_gato, posicion_raton):
             cueva = [random.randint(0, tamano_tablero - 1), random.randint(0, tamano_tablero - 1)]
             tiempo_ultima_cueva = tiempo_actual
             print("¡La cueva ha aparecido en:", cueva)
-        elif cueva is not None and tiempo_actual - tiempo_ultima_cueva >= 20:# si pasaron mas de 30 segundos de la aparcion de la cueva le asigna otro lugar aleatorio
+        elif cueva is not None and tiempo_actual - tiempo_ultima_cueva >= 20:# si pasaron mas de 200 segundos de la aparcion de la cueva le asigna otro lugar aleatorio
             cueva = [random.randint(0, tamano_tablero - 1), random.randint(0, tamano_tablero - 1)]
             tiempo_ultima_cueva = tiempo_actual
             print("¡La cueva ha cambiado de posición a:", cueva)
